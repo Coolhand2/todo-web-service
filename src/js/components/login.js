@@ -16,7 +16,7 @@ export default class Login extends Component {
     render() {
         if(this.state.loggedIn){
             return (
-                <p className="navbar-text"><User id={this.state.id} display={details.USER_DETAIL_DISPLAY_NAVBAR} /></p>
+                <p className="navbar-text"><User id={this.state.id} display={details.USER_DETAIL_DISPLAY_NAVBAR} username='Coolhand2' /></p>
             );
         } else {                    
             return (

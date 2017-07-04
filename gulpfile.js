@@ -1,15 +1,15 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var prefix = require('gulp-autoprefixer');
-var minifycss = require('gulp-clean-css');
-var uglify = require('gulp-uglify');
-var imagemin = require('gulp-imagemin');
-var pump = require('pump');
-var htmlmin = require('gulp-htmlmin');
-var browserSync = require('browser-sync').create();
-var webpack = require('webpack-stream');
-var del = require('del');
-var gutil = require('gulp-util');
+var gulp = require('gulp'),
+    sass = require('gulp-sass'),
+    prefix = require('gulp-autoprefixer'),
+    minifycss = require('gulp-clean-css'),
+    uglify = require('gulp-uglify'),
+    imagemin = require('gulp-imagemin'),
+    pump = require('pump'),
+    htmlmin = require('gulp-htmlmin'),
+    browserSync = require('browser-sync').create(),
+    webpack = require('webpack-stream'),
+    del = require('del'),
+    gutil = require('gulp-util');
 
 gulp.task('css', function () {
     gulp.src(['src/sass/*.scss', 'src/sass/*.css'])
@@ -20,7 +20,6 @@ gulp.task('css', function () {
         .pipe(prefix(
             "last 1 version", "> 1%", "ie 8", "ie 7"
         ))
-        .pipe(gulp.dest('src/css'))
         .pipe(minifycss())
         .pipe(gulp.dest('dist/css'));
 });
@@ -62,7 +61,7 @@ gulp.task('default', ['build'], function () {
     browserSync.init({
         server: 'dist'
     })
-    gulp.watch("src/sass/*.scss", ['css', browserSync.reload]);
+    gulp.watch("src/sass/**/*.scss", ['css', browserSync.reload]);
     gulp.watch("src/js/**/*.js", ['js', browserSync.reload]);
     gulp.watch("src/img/*", ['img', browserSync.reload]);
     gulp.watch('src/*.html', ['html', browserSync.reload]);

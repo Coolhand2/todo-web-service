@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import User from './user';
-import * as locations from '../util/locations';
+import * as details from '../util/UserDetails';
 
 export default class Login extends Component {
 
@@ -16,7 +16,7 @@ export default class Login extends Component {
     render() {
         if(this.state.loggedIn){
             return (
-                <p className="navbar-text"><User id={this.state.id} location={locations.USER_DETAIL_DISPLAY_NAVBAR} /></p>
+                <p className="navbar-text"><User id={this.state.id} display={details.USER_DETAIL_DISPLAY_NAVBAR} /></p>
             );
         } else {                    
             return (

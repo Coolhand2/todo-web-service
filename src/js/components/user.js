@@ -1,28 +1,37 @@
 import React, {Component} from 'react';
-import * as locations from '../util/locations';
+import * as details from '../util/UserDetails';
 
 export default class User extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            username: 'Coolhand2',
-            display: props.location
-        };
     }
 
     render() {
-        switch(this.state.display) {
-            case locations.USER_DETAIL_DISPLAY_NAVBAR:
+        switch(this.props.display) {
+            case details.USER_DETAIL_DISPLAY_NAVBAR:
                 return(
-                    <a href="#" className="navbar-link">{this.state.username}</a>
+                    <a href="#" className="navbar-link">{this.props.username}</a>
                 );
-            case locations.USER_DETAIL_DISPLAY_FULL:
-            case locations.USER_DETAIL_DISPLAY_SHORT:
+            case details.USER_DETAIL_DISPLAY_FULL:
+                return (
+                    <div>
+                        <img src="http://via.placeholder.com/200x200" className="img-thumbnail" />
+                    </div>
+                );
+            case details.USER_DETAIL_DISPLAY_COMMENT:
+                return (
+                    <div className="col-xs-2 center comment-avatar">
+                        <img src="http://via.placeholder.com/75x75" className="img-thumbnail" />
+                        <p>
+                            <a href="#">{this.props.username}</a>
+                        </p>
+                    </div>
+                );
+            case details.USER_DETAIL_DISPLAY_SHORT:
             default:
                 return(
                     <p>
-                        <a href="#">{this.state.username}</a>
+                        <a href="#">{this.props.username}</a>
                     </p>
                 );
         }

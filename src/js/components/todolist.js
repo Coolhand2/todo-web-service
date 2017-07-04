@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Todo from './todo';
+import Urgency from './urgency';
 
 export default class TodoList extends Component {
     constructor() {
@@ -13,7 +14,7 @@ export default class TodoList extends Component {
     }
     addTodo() {
         console.log("TodoList::addTodo");
-        this.state.todoList.push({editing:true});
+        this.state.todoList.push({editing:true,urgency:Urgency.UNKNOWN});
         console.log("TodoList::addTodo::added new todo item");
         this.setState(this.state);
         console.log("TodoList::addTodo::state has been set");
@@ -24,12 +25,13 @@ export default class TodoList extends Component {
         //console.log(this.state.todoList);
         this.setState(this.state);
     }
-    updateTodo(index, item, title, description, urgency) {
+    updateTodo(index, title, description, urgency) {
         //console.log("TodoList::updateTodo");
+        //console.log("urgency: " + urgency);
         this.state.todoList[index] = {
             title: title,
             description: description,
-            urgency: urgency
+            urgency: Urgency.enumValueOf(urgency)
         };
         this.setState(this.state);
     }

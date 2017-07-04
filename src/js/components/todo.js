@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import * as urgencies from '../util/urgencies';
+import Urgency from './urgency';
 
 export default class Todo extends Component {
     constructor(props) {
         console.log("Todo::constructor");
         super(props);
         this.state = {
-            editing: props.editing || false
+            editing: props.editing || false,
+            urgency: props.urgency || Urgency.UNKNOWN
         };
 
         this.edit = this.edit.bind(this);
@@ -18,7 +19,7 @@ export default class Todo extends Component {
     get editing() { return this.props.editing; }
     get title() { return this.props.title; }
     get description() { return this.props.description; }
-    get urgency() { return this.props.urgency; }
+    get urgency() { return this.state.urgency; }
 
     edit() {
         //console.log("Todo::edit");
@@ -32,7 +33,7 @@ export default class Todo extends Component {
 
         this.state.editing = false;
         this.setState(this.state);
-        this.props.updateCallback(this.props.index, this, this.refs.title.value, this.refs.description.value, this.refs.urgency.value);
+        this.props.updateCallback(this.props.index, this.refs.title.value, this.refs.description.value, this.refs.urgency.value);
     }
     cancel() {
         //console.log("Todo::cancel");
@@ -44,6 +45,9 @@ export default class Todo extends Component {
         //console.log("Todo::remove");
         //console.log(this);
         this.props.removeCallback(this.props.index);
+    }
+    currentUrgency(givenUrgency) {
+        return this.props.urgency === givenUrgency;
     }
     renderEdit() {
         //console.log("Todo::renderEdit");
@@ -60,11 +64,11 @@ export default class Todo extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="urgency">Urgency: </label>
-                    <select ref="urgency" className="form-control">
-                        <option value={urgencies.UNKNOWN.value}>{urgencies.UNKNOWN.display}</option>
-                        <option value={urgencies.HIGH.value}>{urgencies.HIGH.display}</option>
-                        <option value={urgencies.MEDIUM.value}>{urgencies.MEDIUM.display}</option>
-                        <option value={urgencies.LOW.value}>{urgencies.LOW.display}</option>
+                    <select ref="urgency" className="form-control" defaultValue={this.props.urgency.name}>
+                        <option value={Urgency.UNKNOWN.name}>{Urgency.UNKNOWN.name}</option>
+                        <option value={Urgency.HIGH.name}>{Urgency.HIGH.name}</option>
+                        <option value={Urgency.MEDIUM.name}>{Urgency.MEDIUM.name}</option>
+                        <option value={Urgency.LOW.name}>{Urgency.LOW.name}</option>
                     </select>
                 </div>
                 <div className="btn-group">

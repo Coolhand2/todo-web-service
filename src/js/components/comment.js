@@ -11,7 +11,7 @@ export default class Comment extends Component {
         return (
             <div>
                 <User display={details.USER_DETAIL_DISPLAY_COMMENT} username={this.props.username} />
-                <div className="col-xs-10 well comment-body"  dangerouslySetInnerHTML={{__html: this.props.comment}} />
+                <div className="col-xs-10 well comment-body">{this.props.children}</div>
             </div>
         );        
     }

@@ -1,0 +1,3 @@
+export const USER_DETAIL_DISPLAY_NAVBAR = 0;
+export const USER_DETAIL_DISPLAY_FULL = 1;
+export const USER_DETAIL_DISPLAY_SHORT = 2;
